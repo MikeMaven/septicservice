@@ -10,11 +10,15 @@ I would opt for a security implementation that is handled by a proxy - namely in
 a security group would be added to configure inbound traffic as only being allowed to come from the API Gateway, and security, including application subscriptions, would be
 handled by the proxy.
 
+To address scalability, I've included a basic Dockerfile so the application can be deployed to Amazon ECS.
+
 ## API Endpoint
 
 The API endpoint is located at `/septic-info/<address>/<zip_code>` and accepts a GET request with an address parameter. It returns septic information for the specified address in JSON format.
 
 Example: `http://localhost:8000/septic-info/123%20Main%20St/02920`
+
+In order to leverage the HouseCanary API, an environment variable of `HOUSECANARY_API_KEY` must be present in the deployment environment.
 
 ## Running the Project
 
