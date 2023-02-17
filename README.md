@@ -2,6 +2,13 @@
 
 This Django project provides a simple API for retrieving septic information based on street address and zip code.
 It returns a boolean value to be leveraged by our application that extracts away the implementation of the 3rd party API it uses to retrieve the information.
+The boolean value is meant to signify whether or not the API returns information signaling that the home does have a septic system, which the front end can then
+leverage to ask the additional question related to septics.
+
+Since the customer facing piece of this application is part of a customer flow prior to account creation, and therefore there is no authenitcated user present,
+I would opt for a security implementation that is handled by a proxy - namely in the form of API Gateway / APIM. In the cloud deployment of this microservice,
+a security group would be added to configure inbound traffic as only being allowed to come from the API Gateway, and security, including application subscriptions, would be
+handled by the proxy.
 
 ## API Endpoint
 
@@ -14,6 +21,14 @@ Example: `http://localhost:8000/septic-info/123%20Main%20St/02920`
 To run the project, make sure you have Django installed and run the following command in your terminal or command prompt:
 
 `python manage.py runserver`
+
+## Running Tests: HouseCanary API is restricted to organizations with paid access
+
+Because HouseCanary is not a free, open API, the API has been mocked in a series of unit tests.
+
+To run the tests, run the following command:
+
+`python manage.py test`
 
 
 The server will start on `http://localhost:8000/`.

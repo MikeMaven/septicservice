@@ -14,7 +14,7 @@ from rest_framework import status
 class SepticInfoView(APIView):
 
     def get(self, request, address, zip_code):
-        # Replace spaces in address with +
+        # Replace spaces in address with + so street address is in the format expected by HouseCanary
         address = address.replace(' ', '+')
 
         # Make request to HouseCanary API to retrieve property details
