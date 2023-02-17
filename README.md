@@ -1,6 +1,7 @@
-# Septic Service API
+# Septic Service Information API
 
-This Django project provides a simple API for retrieving septic information based on address.
+This Django project provides a simple API for retrieving septic information based on street address and zip code.
+It returns a boolean value to be leveraged by our application that extracts away the implementation of the 3rd party API it uses to retrieve the information.
 
 ## API Endpoint
 

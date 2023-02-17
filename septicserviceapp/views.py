@@ -8,14 +8,10 @@ from django.shortcuts import render
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 
 
 class SepticInfoView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, address, zip_code):
         # Replace spaces in address with +
@@ -35,7 +31,7 @@ class SepticInfoView(APIView):
         # Parse response and check for septic system
         if response.ok:
             data = response.json()
-            sewer = data['property/details/summary']['sewer']
+            sewer = data["property/details"]["result"]["property"]["sewer"]
             has_septic = sewer.lower() == 'septic'
             # Return boolean indicating whether property has septic system
             septic_info = {'has_septic': has_septic}
